@@ -13,16 +13,16 @@ function App() {
   const [error, setError] = useState(null);
 
   const secantMethod = (fStr, x0, x1, tolerance = 0.0001, maxIterations = 100) => {
-    let xPrev = parseFloat(x0);
-    let xCurr = parseFloat(x1);
-    let iteration = 0;
+    let xPrev = parseFloat(x0); // xi-1
+    let xCurr = parseFloat(x1); // xi
+    let iteration = 0; // initial iteration
     const iterationData = [];
-
+  
     while (Math.abs(evaluate(fStr, { x: xCurr })) > tolerance && iteration < maxIterations) {
-      let fxCurr = evaluate(fStr, { x: xCurr });
-      let fxPrev = evaluate(fStr, { x: xPrev });
-      let xNext = xCurr - (fxCurr * (xCurr - xPrev)) / (fxCurr - fxPrev);
-
+      let fxCurr = evaluate(fStr, { x: xCurr }); // f(xi)
+      let fxPrev = evaluate(fStr, { x: xPrev }); // f(xi-1)
+      let xNext = xCurr - (fxCurr * (xCurr - xPrev)) / (fxCurr - fxPrev); // xi+1 = xi - (f(xi)*(xi - xi-1)) / (fxi - fxi-1)
+  
       iterationData.push({
         iteration: iteration + 1,
         xPrev: xPrev.toFixed(6),
@@ -30,14 +30,14 @@ function App() {
         fxPrev: fxPrev.toFixed(6),
         fxCurr: fxCurr.toFixed(6),
         xNext: xNext.toFixed(6),
-        error: Math.abs(xNext - xCurr).toFixed(6),
+        error: Math.abs((xCurr - xPrev)/xCurr).toFixed(6),
       });
-
+  
       xPrev = xCurr;
       xCurr = xNext;
       iteration++;
     }
-
+  
     return iterationData;
   };
 

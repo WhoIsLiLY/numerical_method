@@ -4,7 +4,7 @@ function InputForm({ equation, setEquation, x0, setX0, x1, setX1 }) {
   return (
     <div>
       <div className="form-group mb-3">
-        <label htmlFor="equation" className="form-label">Formula (e.g., 4 + x^2 - 2*x^4):</label>
+        <label htmlFor="equation" className="form-label">Formula (e.g., sin(x) - e^x - x or 4 + x^2 - 2*x^4):</label>
         <input
           id="equation"
           type="text"
