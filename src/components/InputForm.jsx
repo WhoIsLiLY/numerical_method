@@ -1,6 +1,6 @@
 import React from 'react';
 
-function InputForm({ equation, setEquation, x0, setX0, x1, setX1 }) {
+function InputForm({ equation, setEquation, x0, setX0, x1, setX1, tolerance, setTolerance}) {
   return (
     <div>
       <div className="form-group mb-3">
@@ -34,6 +34,18 @@ function InputForm({ equation, setEquation, x0, setX0, x1, setX1 }) {
           placeholder="Enter initial guess x₁"
           value={x1}
           onChange={(e) => setX1(e.target.value)}
+        />
+      </div>
+
+      <div className="form-group mb-3">
+        <label htmlFor="tolerance" className="form-label">Tolerance:</label>
+        <input
+          id="tolerance"
+          type="number"
+          className="form-control shadow-sm"
+          placeholder="Enter tolerance"
+          value={tolerance}
+          onChange={(e) => setTolerance(e.target.value)}
         />
       </div>
     </div>
