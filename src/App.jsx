@@ -10,16 +10,11 @@ function App() {
   const [x0, setX0] = useState("");
   const [x1, setX1] = useState("");
   const [tolerance, setTolerance] = useState("");
+  const [maxIterations, setMaxIterations] = useState("");
   const [iterations, setIterations] = useState([]);
   const [error, setError] = useState(null);
 
-  const secantMethod = (
-    fStr,
-    x0,
-    x1,
-    tolerance,
-    maxIterations = 100
-  ) => {
+  const secantMethod = (fStr, x0, x1, tolerance, maxIterations) => {
     let xPrev = parseFloat(x0); // xi-1
     let xCurr = parseFloat(x1); // xi
     let iteration = 0; // initial iteration
@@ -53,7 +48,13 @@ function App() {
 
   const handleCalculate = () => {
     try {
-      const resultIterations = secantMethod(equation, x0, x1,tolerance);
+      const resultIterations = secantMethod(
+        equation,
+        x0,
+        x1,
+        tolerance,
+        maxIterations
+      );
       setIterations(resultIterations);
       setError(null);
     } catch (err) {
@@ -75,7 +76,9 @@ function App() {
           setX0={setX0}
           x1={x1}
           setX1={setX1}
-          tolerance={setTolerance}
+          setTolerance={setTolerance}
+          maxIterations={maxIterations}
+          setMaxIterations={setMaxIterations}
         />
         <Button label="Calculate" onClick={handleCalculate} />
         {error && <p className="text-danger mt-3">{error}</p>}
